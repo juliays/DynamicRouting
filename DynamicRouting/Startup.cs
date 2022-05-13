@@ -35,11 +35,6 @@ namespace DynamicRouting
             services.Configure<RoutingConfiguration>(Configuration.GetSection(RestConst.CONFIG_ROUTING));
             services.AddSingleton<RouteTransformer>();
 
-            // APIKey validation
-            //services.AddAuthentication(RestConst.SCHEMA_API_KEY_VALIDATION)
-            //        .AddScheme<APIKeyAuthOption, APIKeyAuthHandler>(RestConst.SCHEMA_API_KEY_VALIDATION, null);
-
-            //services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DynamicRouting", Version = "v1" });
@@ -60,7 +55,8 @@ namespace DynamicRouting
 
             // handle routing first because key validation could be set up based on each route
             app.UseRouting();
-            app.UseMiddleware<APIKeyValidator>();
+
+            //app.UseMiddleware<APIKeyValidator>();
 
             app.UseEndpoints(endpoints =>
             {
