@@ -1,0 +1,946 @@
+{
+	"info": {
+		"_postman_id": "8ca7efae-d7be-4b56-84f4-ebf9e85cd881",
+		"name": "DynamicRoutingTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "linedata 200",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    //tests['Request resulted in 200 OK'] = responseCode.code === 200;",
+							"    tests['Response latency is acceptable'] = responseTime < 500;;",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "XApiKey",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "XApiKey",
+						"value": "1234",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "XHeartBeat",
+						"value": "line1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Request\": {\n      \"DataPathKey\": \"GKG08.BladeMagazineData\",\n      \"Metadata\": [],\n      \"Items\": [\n        {\n          \"Tag\": \"MagazineCreatedAt\",\n          \"NumericValue\": 123,\n          \"TimeStamp\": \"2022-03-01T12:33:25.544902Z\"\n        },\n        {\n          \"Tag\": \"MagazineCreatedAt\",\n          \"TextValue\": \"2022-02-25T14:41:41.544902Z\",\n          \"TimeStamp\": \"2022-03-01T12:33:25.544902Z\"\n        },\n        {\n          \"Tag\": \"MagazineConsumedAt\",\n          \"TextValue\": \"2022-03-01T12:23:33.544902Z\",\n          \"TimeStamp\": \"2022-03-01T12:33:25.544902Z\"\n        }\n      ]\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/linedata",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"linedata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "visiondata",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    //tests['Request resulted in 200 OK'] = responseCode.code === 200;",
+							"    tests['Response latency is acceptable'] = responseTime < 500;",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "XApiKey",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"textField\" :\"test\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/visiondata",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"visiondata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "magazinedata",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    tests['Request resulted in 200'] = responseCode.code === 200;",
+							"    tests['Response latency is acceptable'] = responseTime < 500;",
+							"    //pm.response.to.have.status(401);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "XApiKey",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "localhost",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Request\":  {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        },  {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }, {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898323Z\"\n            }\n          ]\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/magazinedata",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"magazinedata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "linedata missing XApiKey",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200); ",
+							"    tests['Response latency is acceptable'] = responseTime < 500;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "XApiKey",
+						"value": "1234",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            }\n          ]\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/linedata",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"linedata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "linedata incorrect key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    tests['Response latency is acceptable'] = responseTime < 500;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "XApiKey",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"1\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:04.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:04.898359Z\"\n            }\n          ]\n        },\n        {\n          \"DataPathKey\": \"GKG08.NestVisionData\",\n          \"Metadata\": {\n            \"NestId\": \"2\",\n            \"NestRejectReason\": 0,\n            \"NestProductCode\": \"91219117\"\n          },\n          \"Items\": [\n            {\n              \"Tag\": \"NestProducedAt\",\n              \"TextValue\": \"2022-03-01T14:02:05.898359Z\",\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_1\",\n              \"NumericValue\": -6.416967104042359,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_2\",\n              \"NumericValue\": 5.165183175505778,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            },\n            {\n              \"Tag\": \"Measurement_3\",\n              \"NumericValue\": 8.159730782348728,\n              \"TimeStamp\": \"2022-03-01T14:02:05.898359Z\"\n            }\n          ]\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/linedata",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"linedata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "magazinedata google host unauthorized",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    tests['Response latency is acceptable'] = responseTime < 500;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "XapiKey",
+						"value": "1234",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "google",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:38:49.776735Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:38:49.776735Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"false\",\n          \"TimeStamp\": \"2022-03-01T12:38:54.788140Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 240,\n          \"TimeStamp\": \"2022-03-01T12:38:54.788140Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:38:59.795822Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:38:59.795822Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:39:04.803811Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:39:04.803811Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"false\",\n          \"TimeStamp\": \"2022-03-01T12:39:09.808848Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 240,\n          \"TimeStamp\": \"2022-03-01T12:39:09.808848Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:39:14.821170Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:39:14.821170Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:39:19.839314Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:39:19.839314Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"false\",\n          \"TimeStamp\": \"2022-03-01T12:39:24.845901Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 240,\n          \"TimeStamp\": \"2022-03-01T12:39:24.845901Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"false\",\n          \"TimeStamp\": \"2022-03-01T12:39:29.859083Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 200,\n          \"TimeStamp\": \"2022-03-01T12:39:29.859083Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:39:34.871760Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:39:34.871760Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"false\",\n          \"TimeStamp\": \"2022-03-01T12:39:39.877465Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 200,\n          \"TimeStamp\": \"2022-03-01T12:39:39.877465Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:39:44.890656Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:39:44.890656Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:39:49.905384Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:39:49.905384Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:39:54.914505Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:39:54.914505Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:39:59.925715Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:39:59.925715Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:40:04.946175Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:40:04.946175Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:40:09.968090Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:40:09.968090Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"false\",\n          \"TimeStamp\": \"2022-03-01T12:40:14.979032Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 240,\n          \"TimeStamp\": \"2022-03-01T12:40:14.979032Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"false\",\n          \"TimeStamp\": \"2022-03-01T12:40:19.995189Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 240,\n          \"TimeStamp\": \"2022-03-01T12:40:19.995189Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"false\",\n          \"TimeStamp\": \"2022-03-01T12:40:25.025290Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 240,\n          \"TimeStamp\": \"2022-03-01T12:40:25.025290Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:40:30.043781Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:40:30.043781Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:40:35.057424Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:40:35.057424Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:40:40.065266Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:40:40.065266Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:40:45.078129Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:40:45.078129Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:40:50.087793Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:40:50.087793Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"false\",\n          \"TimeStamp\": \"2022-03-01T12:40:55.096345Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 240,\n          \"TimeStamp\": \"2022-03-01T12:40:55.096345Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:41:00.116152Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:41:00.116152Z\"\n        }\n      ]\n    },\n    {\n      \"DataPathKey\": \"GKG08.LineStatus\",\n      \"Items\": [\n        {\n          \"Tag\": \"RunStatus\",\n          \"TextValue\": \"true\",\n          \"TimeStamp\": \"2022-03-01T12:41:05.129097Z\"\n        },\n        {\n          \"Tag\": \"StopCode\",\n          \"NumericValue\": 0,\n          \"TimeStamp\": \"2022-03-01T12:41:05.129097Z\"\n        }\n      ]\n    }"
+				},
+				"url": {
+					"raw": "https://localhost:5001/magazinedata",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"magazinedata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "magazinedata localhost incorrect key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    tests['Response latency is acceptable'] = responseTime < 500;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var body = [",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:38:49.776735Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:38:49.776735Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"false\",",
+							"          \"TimeStamp\": \"2022-03-01T12:38:54.788140Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 240,",
+							"          \"TimeStamp\": \"2022-03-01T12:38:54.788140Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:38:59.795822Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:38:59.795822Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:04.803811Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:04.803811Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"false\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:09.808848Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 240,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:09.808848Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:14.821170Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:14.821170Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:19.839314Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:19.839314Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"false\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:24.845901Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 240,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:24.845901Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"false\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:29.859083Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 200,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:29.859083Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:34.871760Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:34.871760Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"false\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:39.877465Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 200,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:39.877465Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:44.890656Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:44.890656Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:49.905384Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:49.905384Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:54.914505Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:54.914505Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:39:59.925715Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:39:59.925715Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:04.946175Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:04.946175Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:09.968090Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:09.968090Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"false\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:14.979032Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 240,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:14.979032Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"false\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:19.995189Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 240,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:19.995189Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"false\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:25.025290Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 240,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:25.025290Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:30.043781Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:30.043781Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:35.057424Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:35.057424Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:40.065266Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:40.065266Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:45.078129Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:45.078129Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:50.087793Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:50.087793Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"false\",",
+							"          \"TimeStamp\": \"2022-03-01T12:40:55.096345Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 240,",
+							"          \"TimeStamp\": \"2022-03-01T12:40:55.096345Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:41:00.116152Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:41:00.116152Z\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    {",
+							"      \"DataPathKey\": \"GKG08.LineStatus\",",
+							"      \"Items\": [",
+							"        {",
+							"          \"Tag\": \"RunStatus\",",
+							"          \"TextValue\": \"true\",",
+							"          \"TimeStamp\": \"2022-03-01T12:41:05.129097Z\"",
+							"        },",
+							"        {",
+							"          \"Tag\": \"StopCode\",",
+							"          \"NumericValue\": 0,",
+							"          \"TimeStamp\": \"2022-03-01T12:41:05.129097Z\"",
+							"        }",
+							"      ]",
+							"    }]; ",
+							"",
+							"",
+							"",
+							"pm.collectionVariables.set('value', JSON.stringify(body));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "XapiKey",
+						"value": "124",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "localhost",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "test"
+				},
+				"url": {
+					"raw": "https://localhost:5001/linedata",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"linedata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WeatherForecast",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "XApiKey",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/WeatherForecast",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"WeatherForecast"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "value",
+			"value": ""
+		}
+	]
+}
